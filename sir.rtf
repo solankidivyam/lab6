@@ -1,0 +1,1303 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 CREATE TABLE Student (\
+Roll_Number int PRIMARY KEY not null,\
+Name varchar(50) not null,\
+DOB date not null,\
+Gender varchar(1) check (Gender="M" or Gender="F"),\
+DOA date not null,\
+BCode varchar(10) not null\
+);\
+\
+CREATE TABLE Department (\
+DNo varchar(10) PRIMARY KEY,\
+DName varchar(50) not null\
+);\
+\
+CREATE TABLE Branch(\
+BCode varchar(10) PRIMARY KEY,\
+Bname varchar(50) not null,\
+DNo varchar(10) not null,\
+constraint foreign key (DNo) references Department (DNo) on delete cascade on update cascade \
+);\
+\
+CREATE TABLE Course (\
+CCode varchar(10) PRIMARY KEY,\
+CName varchar(50) not null,\
+Credits int not null,\
+DNo varchar(10) not null,\
+constraint foreign key (DNo) references Department(DNo) on delete cascade on update cascade\
+);\
+\
+CREATE TABLE Branch_Course (\
+BCode varchar(10) not null,\
+CCode varchar(10) not null,\
+Semester int not null,\
+constraint foreign key(BCode) references Branch(BCode) on delete cascade on update cascade,\
+constraint foreign key(CCode) references Course(CCode) on delete cascade on update cascade   \
+);\
+\
+CREATE TABLE Enrolls (\
+RollNo int not null,\
+CCode varchar(10) not null,\
+Sess varchar(50) not null,\
+Grade varchar(1) constraint CHECK((Grade='S') or (Grade='A') or (Grade='B') or (Grade='C') or (Grade='D') or (Grade='E') or (Grade='U')),\
+constraint foreign key(RollNo) references student(Roll_Number) on delete cascade on update cascade,\
+constraint foreign key(CCode) references Course(CCode) on delete cascade on update cascade\
+);\
+\
+INSERT INTO Student\
+VALUES('201951198', 'Divyam', '2000-01-14', 'M', '2021-02-12', 'CS');\
+\
+INSERT INTO Student\
+VALUES('201951199', 'Bhavin', '2001-05-04', 'M', '2021-02-13', 'CS');\
+\
+INSERT INTO Student\
+VALUES('201952201', 'Jigna', '1999-03-31', 'F', '2021-02-14', 'IT');\
+\
+INSERT INTO Student\
+VALUES('201952202', 'Saurav', '2001-11-29', 'M', '2021-02-11', 'IT');\
+\
+INSERT INTO Student\
+VALUES('201952203', 'Abhishek', '2000-09-10', 'M', '2021-02-13', 'IT');\
+\
+INSERT INTO Student\
+VALUES('201952204', 'Anuj', '2000-06-17', 'M', '2021-02-13', 'IT');\
+\
+INSERT INTO Student\
+VALUES('201951019', 'Akansha', '1999-09-19', 'F', '2021-02-11', 'CS');\
+\
+\
+INSERT INTO Department\
+VALUES ('Engineer', 'B.Tech');\
+\
+INSERT INTO Department\
+VALUES ('Sciences', 'M.Sc');\
+\
+INSERT INTO Department\
+VALUES ('ARTS', 'M.A');\
+\
+INSERT INTO Branch\
+VALUES ('CS', 'Computer Science', 'Engineer');\
+\
+INSERT INTO Branch\
+VALUES ('IT', 'Web Technology', 'Engineer');\
+\
+INSERT INTO Branch\
+VALUES ('CE', 'Construction techniques', 'Engineer');\
+\
+INSERT INTO Branch\
+VALUES ('PS', 'Politics in India', 'ARTS');\
+\
+INSERT INTO Branch\
+VALUES ('Sans.', 'SHOLKAS', 'ARTS');\
+\
+INSERT INTO Branch\
+VALUES ('C', 'Organic Chemistry', 'Sciences');\
+\
+INSERT INTO Branch\
+VALUES ('EC', 'Electrical', 'Engineer');\
+\
+INSERT INTO Course\
+VALUES('CS101', 'Introduction to CS', '1', 'Engineer');\
+\
+INSERT INTO Course\
+VALUES('CS201', 'OOPS Concepts', '3', 'Engineer');\
+\
+\
+INSERT INTO Course\
+VALUES('EC101', 'Basic Electronics', '1', 'Engineer');\
+\
+INSERT INTO Course\
+VALUES('Sans.', 'Vyakaran', '2', 'ARTS');\
+\
+INSERT INTO Course\
+VALUES('S101', 'ALkalies', '1', 'Sciences');\
+\
+INSERT INTO Course\
+VALUES('S201', 'Carbon: The life', '2', 'Sciences');\
+\
+INSERT INTO Course\
+VALUES('PS101', 'How democracy works?', '1', 'ARTS');\
+\
+INSERT INTO Course\
+VALUES('IT204', 'The information linkages', '2', 'Engineer');\
+\
+\
+INSERT INTO Course\
+VALUES('CS301', 'Computer software', '5', 'Engineer');\
+\
+\
+INSERT INTO Branch_Course \
+VALUES ('C', 'CS301.', 2);\
+\
+\
+INSERT INTO Enrolls \
+VALUES (201951198, 'CS101','June 2019', 'S');\
+\
+INSERT INTO Enrolls \
+VALUES (201951198, 'CE101','June 2019', 'S');\
+\
+INSERT INTO Enrolls \
+VALUES (201951198, 'PS101','June 2019', 'S');\
+\
+INSERT INTO Enrolls \
+VALUES (201951198, 'Sans.','June 2019', 'S');\
+\
+INSERT INTO Enrolls \
+VALUES (201951019, 'CS101','June 2020', 'S');\
+\
+INSERT INTO Enrolls \
+VALUES (201951019, 'PS101','June 2020', 'S');\
+\
+INSERT INTO Enrolls \
+VALUES (201951019, 'CE101','June 2020', 'A');\
+\
+INSERT INTO Enrolls \
+VALUES (201951019, 'Sans.','June 2020', 'B');\
+\
+INSERT INTO Enrolls \
+VALUES (201951199, 'CS101','June 2020', 'A');\
+\
+INSERT INTO Enrolls \
+VALUES (201951199, 'CE101','June 2020', 'S');\
+\
+INSERT INTO Enrolls \
+VALUES (201951199, 'Sans.','June 2020', 'S');\
+\
+INSERT INTO Enrolls \
+VALUES (201952204, 'IT101','June 2019', 'S');\
+\
+INSERT INTO Enrolls \
+VALUES (201952201, 'CE101','June 2019', 'S');\
+\
+\
+\
+\
+\
+\
+\
+mysql> desc Employee;\
++---------------+-------------+------+-----+---------+----------------+\
+| Field         | Type        | Null | Key | Default | Extra          |\
++---------------+-------------+------+-----+---------+----------------+\
+| Serial_Number | int         | NO   | PRI | NULL    | auto_increment |\
+| Name          | varchar(20) | NO   |     | NULL    |                |\
+| Designation   | varchar(30) | NO   |     | NULL    |                |\
+| Branch        | varchar(30) | NO   |     | NULL    |                |\
+| Salary        | int         | NO   |     | NULL    |                |\
++---------------+-------------+------+-----+---------+----------------+\
+5 rows in set (0.01 sec)\
+\
+mysql> desc Employee;\
++---------------+-------------+------+-----+---------+----------------+\
+| Field         | Type        | Null | Key | Default | Extra          |\
++---------------+-------------+------+-----+---------+----------------+\
+| Serial_Number | int         | NO   | PRI | NULL    | auto_increment |\
+| Name          | varchar(20) | NO   |     | NULL    |                |\
+| Designation   | varchar(30) | NO   |     | NULL    |                |\
+| Branch        | varchar(30) | NO   |     | NULL    |                |\
++---------------+-------------+------+-----+---------+----------------+\
+4 rows in set (0.00 sec)\
+\
+mysql> select * Employee;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Employee' at line 1\
+mysql> select * from Employee;\
++---------------+---------+-------------+---------+\
+| Serial_Number | Name    | Designation | Branch  |\
++---------------+---------+-------------+---------+\
+|             1 | Ram     | Manager     | Chennai |\
+|             2 | Santosh | Supervisor  | Madurai |\
+|             3 | Hari    | Assistant   | Trichy  |\
++---------------+---------+-------------+---------+\
+3 rows in set (0.00 sec)\
+\
+mysql> alter table Employee add Salary int not null;\
+Query OK, 0 rows affected (0.03 sec)\
+Records: 0  Duplicates: 0  Warnings: 0\
+\
+mysql> select * from Employee;\
++---------------+---------+-------------+---------+--------+\
+| Serial_Number | Name    | Designation | Branch  | Salary |\
++---------------+---------+-------------+---------+--------+\
+|             1 | Ram     | Manager     | Chennai |      0 |\
+|             2 | Santosh | Supervisor  | Madurai |      0 |\
+|             3 | Hari    | Assistant   | Trichy  |      0 |\
++---------------+---------+-------------+---------+--------+\
+3 rows in set (0.01 sec)\
+\
+mysql> select * from Employee;\
++---------------+--------------+-------------+---------+--------+\
+| Serial_Number | employeeName | Designation | Branch  | Salary |\
++---------------+--------------+-------------+---------+--------+\
+|             1 | Ram          | Manager     | Chennai |      0 |\
+|             2 | Santosh      | Supervisor  | Madurai |      0 |\
+|             3 | Hari         | Assistant   | Trichy  |      0 |\
++---------------+--------------+-------------+---------+--------+\
+3 rows in set (0.00 sec)\
+\
+mysql> desc emp;\
++---------------+-------------+------+-----+---------+----------------+\
+| Field         | Type        | Null | Key | Default | Extra          |\
++---------------+-------------+------+-----+---------+----------------+\
+| Serial_Number | int         | NO   | PRI | NULL    | auto_increment |\
+| Name          | varchar(20) | NO   |     | NULL    |                |\
+| Designation   | varchar(30) | NO   |     | NULL    |                |\
+| Branch        | varchar(30) | NO   |     | NULL    |                |\
++---------------+-------------+------+-----+---------+----------------+\
+4 rows in set (0.00 sec)\
+\
+mysql> insert into emp(Serial_Number,Name,Designation,Branch) select Serial_Number,employeeName,Designation,Branch from Employee;\
+Query OK, 3 rows affected (0.01 sec)\
+Records: 3  Duplicates: 0  Warnings: 0\
+\
+mysql> select * from emp;\
++---------------+---------+-------------+---------+\
+| Serial_Number | Name    | Designation | Branch  |\
++---------------+---------+-------------+---------+\
+|             1 | Ram     | Manager     | Chennai |\
+|             2 | Santosh | Supervisor  | Madurai |\
+|             3 | Hari    | Assistant   | Trichy  |\
++---------------+---------+-------------+---------+\
+3 rows in set (0.01 sec)\
+\
+mysql> delete from Employee\
+    -> where Serial_Number = 2;\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> select * from Employee;\
++---------------+--------------+-------------+---------+--------+\
+| Serial_Number | employeeName | Designation | Branch  | Salary |\
++---------------+--------------+-------------+---------+--------+\
+|             1 | Ram          | Manager     | Chennai |      0 |\
+|             3 | Hari         | Assistant   | Trichy  |      0 |\
++---------------+--------------+-------------+---------+--------+\
+2 rows in set (0.00 sec)\
+\
+mysql> truncate table Employee;\
+Query OK, 0 rows affected (0.03 sec)\
+\
+mysql> drop table Employee;\
+Query OK, 0 rows affected (0.01 sec)\
+\
+mysql> desc Employee;\
+ERROR 1146 (42S02): Table 'userlogin.employee' doesn't exist\
+mysql> create database Question_2;\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> use Question_2;\
+Reading table information for completion of table and column names\
+You can turn off this feature to get a quicker startup with -A\
+\
+Database changed\
+mysql> show tables;\
++----------------------+\
+| Tables_in_question_2 |\
++----------------------+\
+| Student              |\
++----------------------+\
+1 row in set (0.01 sec)\
+\
+mysql> desc Student;\
++-------------+-------------+------+-----+---------+-------+\
+| Field       | Type        | Null | Key | Default | Extra |\
++-------------+-------------+------+-----+---------+-------+\
+| Roll_Number | int         | NO   | PRI | NULL    |       |\
+| Name        | varchar(50) | NO   |     | NULL    |       |\
+| DOB         | date        | NO   |     | NULL    |       |\
+| Gender      | varchar(1)  | YES  |     | NULL    |       |\
+| DOA         | date        | NO   |     | NULL    |       |\
+| BCode       | varchar(10) | NO   |     | NULL    |       |\
++-------------+-------------+------+-----+---------+-------+\
+6 rows in set (0.01 sec)\
+\
+mysql> show tables;\
++----------------------+\
+| Tables_in_question_2 |\
++----------------------+\
+| Branch               |\
+| Department           |\
+| Student              |\
++----------------------+\
+3 rows in set (0.00 sec)\
+\
+mysql> desc Department;\
++-------+-------------+------+-----+---------+-------+\
+| Field | Type        | Null | Key | Default | Extra |\
++-------+-------------+------+-----+---------+-------+\
+| DNo   | varchar(10) | NO   | PRI | NULL    |       |\
+| DName | varchar(50) | NO   |     | NULL    |       |\
++-------+-------------+------+-----+---------+-------+\
+2 rows in set (0.00 sec)\
+\
+mysql> desc Branch;\
++-------+-------------+------+-----+---------+-------+\
+| Field | Type        | Null | Key | Default | Extra |\
++-------+-------------+------+-----+---------+-------+\
+| BCode | varchar(10) | NO   | PRI | NULL    |       |\
+| Bname | varchar(50) | NO   |     | NULL    |       |\
+| DNo   | varchar(10) | NO   | MUL | NULL    |       |\
++-------+-------------+------+-----+---------+-------+\
+3 rows in set (0.01 sec)\
+\
+mysql> show tables;\
++----------------------+\
+| Tables_in_question_2 |\
++----------------------+\
+| Branch               |\
+| Branch_Course        |\
+| Course               |\
+| Department           |\
+| Enrolls              |\
+| Student              |\
++----------------------+\
+6 rows in set (0.00 sec)\
+\
+mysql> desc Enrolls;\
++--------+-------------+------+-----+---------+-------+\
+| Field  | Type        | Null | Key | Default | Extra |\
++--------+-------------+------+-----+---------+-------+\
+| RollNo | int         | NO   | MUL | NULL    |       |\
+| CCode  | varchar(10) | NO   | MUL | NULL    |       |\
+| Sess   | varchar(50) | NO   |     | NULL    |       |\
+| Grade  | varchar(1)  | YES  |     | NULL    |       |\
++--------+-------------+------+-----+---------+-------+\
+4 rows in set (0.01 sec)\
+\
+mysql> alter table Enrolls add primary key(RollNo,CCode,Sess);\
+Query OK, 0 rows affected (0.05 sec)\
+Records: 0  Duplicates: 0  Warnings: 0\
+\
+mysql> desc Branch_Course;\
++----------+-------------+------+-----+---------+-------+\
+| Field    | Type        | Null | Key | Default | Extra |\
++----------+-------------+------+-----+---------+-------+\
+| BCode    | varchar(10) | NO   | MUL | NULL    |       |\
+| CCode    | varchar(10) | NO   | MUL | NULL    |       |\
+| Semester | int         | NO   |     | NULL    |       |\
++----------+-------------+------+-----+---------+-------+\
+3 rows in set (0.01 sec)\
+\
+mysql> desc Enrolls;\
++--------+-------------+------+-----+---------+-------+\
+| Field  | Type        | Null | Key | Default | Extra |\
++--------+-------------+------+-----+---------+-------+\
+| RollNo | int         | NO   | PRI | NULL    |       |\
+| CCode  | varchar(10) | NO   | PRI | NULL    |       |\
+| Sess   | varchar(50) | NO   | PRI | NULL    |       |\
+| Grade  | varchar(1)  | YES  |     | NULL    |       |\
++--------+-------------+------+-----+---------+-------+\
+4 rows in set (0.00 sec)\
+\
+mysql> select * from Student;\
++-------------+--------+------------+--------+------------+-------+\
+| Roll_Number | Name   | DOB        | Gender | DOA        | BCode |\
++-------------+--------+------------+--------+------------+-------+\
+|   201951198 | Divyam | 2000-01-14 | M      | 2021-02-12 | CS    |\
++-------------+--------+------------+--------+------------+-------+\
+1 row in set (0.00 sec)\
+\
+mysql> select * from Student;\
++-------------+----------+------------+--------+------------+-------+\
+| Roll_Number | Name     | DOB        | Gender | DOA        | BCode |\
++-------------+----------+------------+--------+------------+-------+\
+|   201951019 | Akansha  | 1999-09-19 | F      | 2021-02-11 | CS    |\
+|   201951198 | Divyam   | 2000-01-14 | M      | 2021-02-12 | CS    |\
+|   201951199 | Bhavin   | 2001-05-04 | M      | 2021-02-13 | CS    |\
+|   201952201 | Jigna    | 1999-03-31 | F      | 2021-02-14 | IT    |\
+|   201952202 | Saurav   | 2001-11-29 | M      | 2021-02-11 | IT    |\
+|   201952203 | Abhishek | 2000-09-10 | M      | 2021-02-13 | IT    |\
+|   201952204 | Anuj     | 2000-06-17 | M      | 2021-02-13 | IT    |\
++-------------+----------+------------+--------+------------+-------+\
+7 rows in set (0.00 sec)\
+\
+mysql> desc student;\
++-------------+-------------+------+-----+---------+-------+\
+| Field       | Type        | Null | Key | Default | Extra |\
++-------------+-------------+------+-----+---------+-------+\
+| Roll_Number | int         | NO   | PRI | NULL    |       |\
+| Name        | varchar(50) | NO   |     | NULL    |       |\
+| DOB         | date        | NO   |     | NULL    |       |\
+| Gender      | varchar(1)  | YES  |     | NULL    |       |\
+| DOA         | date        | NO   |     | NULL    |       |\
+| BCode       | varchar(10) | NO   |     | NULL    |       |\
++-------------+-------------+------+-----+---------+-------+\
+6 rows in set (0.00 sec)\
+\
+mysql> desc Branch;\
++-------+-------------+------+-----+---------+-------+\
+| Field | Type        | Null | Key | Default | Extra |\
++-------+-------------+------+-----+---------+-------+\
+| BCode | varchar(10) | NO   | PRI | NULL    |       |\
+| Bname | varchar(50) | NO   |     | NULL    |       |\
+| DNo   | varchar(10) | NO   | MUL | NULL    |       |\
++-------+-------------+------+-----+---------+-------+\
+3 rows in set (0.00 sec)\
+\
+mysql> desc Department;\
++-------+-------------+------+-----+---------+-------+\
+| Field | Type        | Null | Key | Default | Extra |\
++-------+-------------+------+-----+---------+-------+\
+| DNo   | varchar(10) | NO   | PRI | NULL    |       |\
+| DName | varchar(50) | NO   |     | NULL    |       |\
++-------+-------------+------+-----+---------+-------+\
+2 rows in set (0.00 sec)\
+\
+mysql> select * from Department;\
++----------+--------+\
+| DNo      | DName  |\
++----------+--------+\
+| Engineer | B.Tech |\
++----------+--------+\
+1 row in set (0.01 sec)\
+\
+mysql> select * from Department;\
++----------+--------+\
+| DNo      | DName  |\
++----------+--------+\
+| ARTS     | M.A    |\
+| Engineer | B.Tech |\
+| Sciences | M.Sc   |\
++----------+--------+\
+3 rows in set (0.00 sec)\
+\
+mysql> desc Branch;\
++-------+-------------+------+-----+---------+-------+\
+| Field | Type        | Null | Key | Default | Extra |\
++-------+-------------+------+-----+---------+-------+\
+| BCode | varchar(10) | NO   | PRI | NULL    |       |\
+| Bname | varchar(50) | NO   |     | NULL    |       |\
+| DNo   | varchar(10) | NO   | MUL | NULL    |       |\
++-------+-------------+------+-----+---------+-------+\
+3 rows in set (0.00 sec)\
+\
+mysql> select * from Branch;\
++-------+------------------+----------+\
+| BCode | Bname            | DNo      |\
++-------+------------------+----------+\
+| CS    | Computer Science | Engineer |\
++-------+------------------+----------+\
+1 row in set (0.00 sec)\
+\
+mysql> select * from Branch;\
++-------+-------------------------+----------+\
+| BCode | Bname                   | DNo      |\
++-------+-------------------------+----------+\
+| CE    | Construction techniques | Engineer |\
+| CS    | Computer Science        | Engineer |\
+| IT    | Web Technology          | Engineer |\
++-------+-------------------------+----------+\
+3 rows in set (0.00 sec)\
+\
+mysql> select * from Branch;\
++-------+-------------------------+----------+\
+| BCode | Bname                   | DNo      |\
++-------+-------------------------+----------+\
+| CE    | Construction techniques | Engineer |\
+| CS    | Computer Science        | Engineer |\
+| IT    | Web Technology          | Engineer |\
+| PS    | Politics in India       | ARTS     |\
++-------+-------------------------+----------+\
+4 rows in set (0.01 sec)\
+\
+mysql> select * from Branch;\
++-------+-------------------------+----------+\
+| BCode | Bname                   | DNo      |\
++-------+-------------------------+----------+\
+| CE    | Construction techniques | Engineer |\
+| CS    | Computer Science        | Engineer |\
+| IT    | Web Technology          | Engineer |\
+| PS    | Politics in India       | ARTS     |\
+| Sans. | SHOLKAS                 | ARTS     |\
++-------+-------------------------+----------+\
+5 rows in set (0.00 sec)\
+\
+mysql> select * from Branch;\
++-------+-------------------------+----------+\
+| BCode | Bname                   | DNo      |\
++-------+-------------------------+----------+\
+| C     | Organic Chemistry       | Sciences |\
+| CE    | Construction techniques | Engineer |\
+| CS    | Computer Science        | Engineer |\
+| IT    | Web Technology          | Engineer |\
+| PS    | Politics in India       | ARTS     |\
+| Sans. | SHOLKAS                 | ARTS     |\
++-------+-------------------------+----------+\
+6 rows in set (0.00 sec)\
+\
+mysql> select * from Branch;\
++-------+-------------------------+----------+\
+| BCode | Bname                   | DNo      |\
++-------+-------------------------+----------+\
+| C     | Organic Chemistry       | Sciences |\
+| CE    | Construction techniques | Engineer |\
+| CS    | Computer Science        | Engineer |\
+| IC    | Inorganic Chemistry     | Sciences |\
+| IT    | Web Technology          | Engineer |\
+| PS    | Politics in India       | ARTS     |\
+| Sans. | SHOLKAS                 | ARTS     |\
++-------+-------------------------+----------+\
+7 rows in set (0.00 sec)\
+\
+mysql> select * from Course;\
+Empty set (0.00 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------+---------+----------+\
+| CCode | CName              | Credits | DNo      |\
++-------+--------------------+---------+----------+\
+| CS101 | Introduction to CS |       3 | Engineer |\
++-------+--------------------+---------+----------+\
+1 row in set (0.00 sec)\
+\
+mysql> select * from Branch_Course;\
++-------+-------+----------+\
+| BCode | CCode | Semester |\
++-------+-------+----------+\
+| CS    | CS101 |        1 |\
++-------+-------+----------+\
+1 row in set (0.01 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------+---------+----------+\
+| CCode | CName              | Credits | DNo      |\
++-------+--------------------+---------+----------+\
+| CS101 | Introduction to CS |       3 | Engineer |\
+| CS201 | OOPS Concepts      |       3 | Engineer |\
++-------+--------------------+---------+----------+\
+2 rows in set (0.00 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------+---------+----------+\
+| CCode | CName              | Credits | DNo      |\
++-------+--------------------+---------+----------+\
+| CS101 | Introduction to CS |       3 | Engineer |\
+| CS201 | OOPS Concepts      |       3 | Engineer |\
+| IT301 | Web linkagings     |       5 | Engineer |\
++-------+--------------------+---------+----------+\
+3 rows in set (0.00 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------+---------+----------+\
+| CCode | CName              | Credits | DNo      |\
++-------+--------------------+---------+----------+\
+| CE101 | Basic civil eng    |       1 | Engineer |\
+| CS101 | Introduction to CS |       3 | Engineer |\
+| CS201 | OOPS Concepts      |       3 | Engineer |\
+| IT301 | Web linkagings     |       5 | Engineer |\
++-------+--------------------+---------+----------+\
+4 rows in set (0.00 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------+---------+----------+\
+| CCode | CName              | Credits | DNo      |\
++-------+--------------------+---------+----------+\
+| CE101 | Basic civil eng    |       1 | Engineer |\
+| CS101 | Introduction to CS |       3 | Engineer |\
+| CS201 | OOPS Concepts      |       3 | Engineer |\
+| IT301 | Web linkagings     |       5 | Engineer |\
+| Sans. | Vyakaran           |       2 | ARTS     |\
++-------+--------------------+---------+----------+\
+5 rows in set (0.00 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------+---------+----------+\
+| CCode | CName              | Credits | DNo      |\
++-------+--------------------+---------+----------+\
+| CE101 | Basic civil eng    |       1 | Engineer |\
+| CS101 | Introduction to CS |       3 | Engineer |\
+| CS201 | OOPS Concepts      |       3 | Engineer |\
+| IT301 | Web linkagings     |       5 | Engineer |\
+| S101  | ALkalies           |       1 | Sciences |\
+| S201  | Carbon: The life   |       2 | Sciences |\
+| Sans. | Vyakaran           |       2 | ARTS     |\
++-------+--------------------+---------+----------+\
+7 rows in set (0.00 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------------+---------+----------+\
+| CCode | CName                    | Credits | DNo      |\
++-------+--------------------------+---------+----------+\
+| CE101 | Basic civil eng          |       1 | Engineer |\
+| CS101 | Introduction to CS       |       3 | Engineer |\
+| CS201 | OOPS Concepts            |       3 | Engineer |\
+| IT204 | The information linkages |       2 | Engineer |\
+| IT301 | Web linkagings           |       5 | Engineer |\
+| PS101 | How democracy works?     |       1 | ARTS     |\
+| S101  | ALkalies                 |       1 | Sciences |\
+| S201  | Carbon: The life         |       2 | Sciences |\
+| Sans. | Vyakaran                 |       2 | ARTS     |\
++-------+--------------------------+---------+----------+\
+9 rows in set (0.00 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------------+---------+----------+\
+| CCode | CName                    | Credits | DNo      |\
++-------+--------------------------+---------+----------+\
+| CE101 | Basic civil eng          |       1 | Engineer |\
+| CS101 | Introduction to CS       |       3 | Engineer |\
+| CS201 | OOPS Concepts            |       3 | Engineer |\
+| CS208 | Computer Architecture    |       4 | Engineer |\
+| IT204 | The information linkages |       2 | Engineer |\
+| IT301 | Web linkagings           |       5 | Engineer |\
+| PS101 | How democracy works?     |       1 | ARTS     |\
+| S101  | ALkalies                 |       1 | Sciences |\
+| S201  | Carbon: The life         |       2 | Sciences |\
+| Sans. | Vyakaran                 |       2 | ARTS     |\
++-------+--------------------------+---------+----------+\
+10 rows in set (0.00 sec)\
+\
+mysql> select * from Branch_Course;\
++-------+-------+----------+\
+| BCode | CCode | Semester |\
++-------+-------+----------+\
+| CS    | CS101 |        1 |\
+| CS    | CS201 |        2 |\
++-------+-------+----------+\
+2 rows in set (0.00 sec)\
+\
+mysql> select * from Branch_Course;\
++-------+-------+----------+\
+| BCode | CCode | Semester |\
++-------+-------+----------+\
+| CS    | CS101 |        1 |\
+| CS    | CS201 |        2 |\
+| CS    | CS208 |        4 |\
+| CE    | CE101 |       11 |\
+| IT    | IT204 |        3 |\
++-------+-------+----------+\
+5 rows in set (0.00 sec)\
+\
+mysql> delete row from Branch_Course where Semester = 11;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'row from Branch_Course where Semester = 11' at line 1\
+mysql> delete from Branch_Course where BCode=CE;\
+ERROR 1054 (42S22): Unknown column 'CE' in 'where clause'\
+mysql> delete from Branch_Course where BCode='CE';\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> select * from Branch_Course;\
++-------+-------+----------+\
+| BCode | CCode | Semester |\
++-------+-------+----------+\
+| CS    | CS101 |        1 |\
+| CS    | CS201 |        2 |\
+| CS    | CS208 |        4 |\
+| IT    | IT204 |        3 |\
++-------+-------+----------+\
+4 rows in set (0.00 sec)\
+\
+mysql> select * from Branch_Course;\
++-------+-------+----------+\
+| BCode | CCode | Semester |\
++-------+-------+----------+\
+| CS    | CS101 |        1 |\
+| CS    | CS201 |        2 |\
+| CS    | CS208 |        4 |\
+| IT    | IT204 |        3 |\
+| CE    | CE101 |        1 |\
++-------+-------+----------+\
+5 rows in set (0.00 sec)\
+\
+mysql> select * from Branch_Course;\
++-------+-------+----------+\
+| BCode | CCode | Semester |\
++-------+-------+----------+\
+| CS    | CS101 |        1 |\
+| CS    | CS201 |        2 |\
+| CS    | CS208 |        4 |\
+| IT    | IT204 |        3 |\
+| CE    | CE101 |        1 |\
+| IT    | IT301 |        5 |\
+| PS    | PS101 |        1 |\
+| C     | S101  |        1 |\
+| C     | S201  |        2 |\
+| Sans. | Sans. |        1 |\
++-------+-------+----------+\
+10 rows in set (0.00 sec)\
+\
+mysql> show tables;\
++----------------------+\
+| Tables_in_question_2 |\
++----------------------+\
+| Branch               |\
+| Branch_Course        |\
+| Course               |\
+| Department           |\
+| Enrolls              |\
+| Student              |\
++----------------------+\
+6 rows in set (0.00 sec)\
+\
+mysql> select * from Enrolls;\
+Empty set (0.00 sec)\
+\
+mysql> select * from Department  where Department.Dno in(select Branch.Dno from Branch group by Branch.Dno having count(Branch.Dno) > 3);\
+Empty set (0.02 sec)\
+\
+mysql> select * from Branch;\
++-------+-------------------------+----------+\
+| BCode | Bname                   | DNo      |\
++-------+-------------------------+----------+\
+| C     | Organic Chemistry       | Sciences |\
+| CE    | Construction techniques | Engineer |\
+| CS    | Computer Science        | Engineer |\
+| IC    | Inorganic Chemistry     | Sciences |\
+| IT    | Web Technology          | Engineer |\
+| PS    | Politics in India       | ARTS     |\
+| Sans. | SHOLKAS                 | ARTS     |\
++-------+-------------------------+----------+\
+7 rows in set (0.00 sec)\
+\
+mysql> select * from Department;\
++----------+--------+\
+| DNo      | DName  |\
++----------+--------+\
+| ARTS     | M.A    |\
+| Engineer | B.Tech |\
+| Sciences | M.Sc   |\
++----------+--------+\
+3 rows in set (0.00 sec)\
+\
+mysql> select * from Branch;\
++-------+-------------------------+----------+\
+| BCode | Bname                   | DNo      |\
++-------+-------------------------+----------+\
+| C     | Organic Chemistry       | Sciences |\
+| CE    | Construction techniques | Engineer |\
+| CS    | Computer Science        | Engineer |\
+| EC    | Electrical              | Engineer |\
+| IC    | Inorganic Chemistry     | Sciences |\
+| IT    | Web Technology          | Engineer |\
+| PS    | Politics in India       | ARTS     |\
+| Sans. | SHOLKAS                 | ARTS     |\
++-------+-------------------------+----------+\
+8 rows in set (0.00 sec)\
+\
+mysql> select * from Department  where Department.Dno in(select Branch.Dno from Branch group by Branch.Dno having count(Branch.Dno) > 3);\
++----------+--------+\
+| DNo      | DName  |\
++----------+--------+\
+| Engineer | B.Tech |\
++----------+--------+\
+1 row in set (0.00 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------------+---------+----------+\
+| CCode | CName                    | Credits | DNo      |\
++-------+--------------------------+---------+----------+\
+| CE101 | Basic civil eng          |       1 | Engineer |\
+| CS101 | Introduction to CS       |       3 | Engineer |\
+| CS201 | OOPS Concepts            |       3 | Engineer |\
+| CS208 | Computer Architecture    |       4 | Engineer |\
+| IT204 | The information linkages |       2 | Engineer |\
+| IT301 | Web linkagings           |       5 | Engineer |\
+| PS101 | How democracy works?     |       1 | ARTS     |\
+| S101  | ALkalies                 |       1 | Sciences |\
+| S201  | Carbon: The life         |       2 | Sciences |\
+| Sans. | Vyakaran                 |       2 | ARTS     |\
++-------+--------------------------+---------+----------+\
+10 rows in set (0.00 sec)\
+\
+mysql> select * from Department where Department.Dno in(select Course.Dno from Course group by Course.Dno having count(Course.Ccode) > 6);\
+Empty set (0.00 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------------+---------+----------+\
+| CCode | CName                    | Credits | DNo      |\
++-------+--------------------------+---------+----------+\
+| CE101 | Basic civil eng          |       1 | Engineer |\
+| CS101 | Introduction to CS       |       3 | Engineer |\
+| CS201 | OOPS Concepts            |       3 | Engineer |\
+| CS208 | Computer Architecture    |       4 | Engineer |\
+| EC101 | Basic Electronics        |       1 | Engineer |\
+| IT204 | The information linkages |       2 | Engineer |\
+| IT301 | Web linkagings           |       5 | Engineer |\
+| PS101 | How democracy works?     |       1 | ARTS     |\
+| S101  | ALkalies                 |       1 | Sciences |\
+| S201  | Carbon: The life         |       2 | Sciences |\
+| Sans. | Vyakaran                 |       2 | ARTS     |\
++-------+--------------------------+---------+----------+\
+11 rows in set (0.00 sec)\
+\
+mysql> select * from Department where Department.Dno in(select Course.Dno from Course group by Course.Dno having count(Course.Ccode) > 6);\
++----------+--------+\
+| DNo      | DName  |\
++----------+--------+\
+| Engineer | B.Tech |\
++----------+--------+\
+1 row in set (0.00 sec)\
+\
+mysql> select * from Course where Course.Ccode in(select Branch_Course.Ccode from Branch_Course group by Branch_Course.Ccode having count(Branch_Course.Bcode) > 3);\
+Empty set (0.00 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------------+---------+----------+\
+| CCode | CName                    | Credits | DNo      |\
++-------+--------------------------+---------+----------+\
+| CE101 | Basic civil eng          |       1 | Engineer |\
+| CS101 | Introduction to CS       |       3 | Engineer |\
+| CS201 | OOPS Concepts            |       3 | Engineer |\
+| CS208 | Computer Architecture    |       4 | Engineer |\
+| EC101 | Basic Electronics        |       1 | Engineer |\
+| IT204 | The information linkages |       2 | Engineer |\
+| IT301 | Web linkagings           |       5 | Engineer |\
+| PS101 | How democracy works?     |       1 | ARTS     |\
+| S101  | ALkalies                 |       1 | Sciences |\
+| S201  | Carbon: The life         |       2 | Sciences |\
+| Sans. | Vyakaran                 |       2 | ARTS     |\
++-------+--------------------------+---------+----------+\
+11 rows in set (0.00 sec)\
+\
+mysql> select * from Branch;\
++-------+-------------------------+----------+\
+| BCode | Bname                   | DNo      |\
++-------+-------------------------+----------+\
+| C     | Organic Chemistry       | Sciences |\
+| CE    | Construction techniques | Engineer |\
+| CS    | Computer Science        | Engineer |\
+| EC    | Electrical              | Engineer |\
+| IC    | Inorganic Chemistry     | Sciences |\
+| IT    | Web Technology          | Engineer |\
+| PS    | Politics in India       | ARTS     |\
+| Sans. | SHOLKAS                 | ARTS     |\
++-------+-------------------------+----------+\
+8 rows in set (0.00 sec)\
+\
+mysql> select * from Branch_Course;\
++-------+-------+----------+\
+| BCode | CCode | Semester |\
++-------+-------+----------+\
+| CS    | CS101 |        1 |\
+| CS    | CS201 |        2 |\
+| CS    | CS208 |        4 |\
+| IT    | IT204 |        3 |\
+| CE    | CE101 |        1 |\
+| IT    | IT301 |        5 |\
+| PS    | PS101 |        1 |\
+| C     | S101  |        1 |\
+| C     | S201  |        2 |\
+| Sans. | Sans. |        1 |\
++-------+-------+----------+\
+10 rows in set (0.00 sec)\
+\
+mysql> select * from Course;\
++-------+--------------------------+---------+----------+\
+| CCode | CName                    | Credits | DNo      |\
++-------+--------------------------+---------+----------+\
+| CE101 | Basic civil eng          |       1 | Engineer |\
+| CS101 | Introduction to CS       |       3 | Engineer |\
+| CS201 | OOPS Concepts            |       3 | Engineer |\
+| CS208 | Computer Architecture    |       4 | Engineer |\
+| CS301 | Computer software        |       5 | Engineer |\
+| EC101 | Basic Electronics        |       1 | Engineer |\
+| IT204 | The information linkages |       2 | Engineer |\
+| IT301 | Web linkagings           |       5 | Engineer |\
+| PS101 | How democracy works?     |       1 | ARTS     |\
+| S101  | ALkalies                 |       1 | Sciences |\
+| S201  | Carbon: The life         |       2 | Sciences |\
+| Sans. | Vyakaran                 |       2 | ARTS     |\
++-------+--------------------------+---------+----------+\
+12 rows in set (0.00 sec)\
+\
+mysql> select * from Course where Course.Ccode in(select Branch_Course.Ccode from Branch_Course group by Branch_Course.Ccode having count(Branch_Course.Bcode) > 3);\
+Empty set (0.00 sec)\
+\
+mysql> insert into Branch_Course values('CS', 'CS301', 3);\
+Query OK, 1 row affected (0.01 sec)\
+\
+mysql> select * from Branch_Course;\
++-------+-------+----------+\
+| BCode | CCode | Semester |\
++-------+-------+----------+\
+| CS    | CS101 |        1 |\
+| CS    | CS201 |        2 |\
+| CS    | CS208 |        4 |\
+| IT    | IT204 |        3 |\
+| CE    | CE101 |        1 |\
+| IT    | IT301 |        5 |\
+| PS    | PS101 |        1 |\
+| C     | S101  |        1 |\
+| C     | S201  |        2 |\
+| Sans. | Sans. |        1 |\
+| CS    | CS301 |        3 |\
++-------+-------+----------+\
+11 rows in set (0.01 sec)\
+\
+mysql> select * from Course where Course.Ccode in(select Branch_Course.Ccode from Branch_Course group by Branch_Course.Ccode having count(Branch_Course.Bcode) > 3);\
+Empty set (0.01 sec)\
+\
+mysql> insert into Branch_Course values('IT', 'CS101', 1);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into Branch_Course values('C', 'CS101', 1);\
+Query OK, 1 row affected (0.00 sec)\
+\
+mysql> insert into Branch_Course values('PS', 'CS101', 1);\
+Query OK, 1 row affected (0.01 sec)\
+\
+mysql> select * from Course where Course.Ccode in(select Branch_Course.Ccode from Branch_Course group by Branch_Course.Ccode having count(Branch_Course.Bcode) > 3);\
++-------+--------------------+---------+----------+\
+| CCode | CName              | Credits | DNo      |\
++-------+--------------------+---------+----------+\
+| CS101 | Introduction to CS |       3 | Engineer |\
++-------+--------------------+---------+----------+\
+1 row in set (0.00 sec)\
+\
+mysql> Develop a SQL query to list students who got \'91S\'92 in more than 2 courses during single enrol\
+    ->\
+    -> ;\
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Develop a SQL query to list students who got \'91S\'92 in more than 2 courses duri' at line 1\
+mysql> select * from Enrolls;\
++-----------+-------+-----------+-------+\
+| RollNo    | CCode | Sess      | Grade |\
++-----------+-------+-----------+-------+\
+| 201951198 | CS101 | June 2019 | S     |\
++-----------+-------+-----------+-------+\
+1 row in set (0.00 sec)\
+\
+mysql> select * from Enrolls;\
++-----------+-------+-----------+-------+\
+| RollNo    | CCode | Sess      | Grade |\
++-----------+-------+-----------+-------+\
+| 201951198 | CE101 | June 2019 | S     |\
+| 201951198 | CS101 | June 2019 | S     |\
+| 201951198 | PS101 | June 2019 | S     |\
+| 201951198 | Sans. | June 2019 | S     |\
++-----------+-------+-----------+-------+\
+4 rows in set (0.00 sec)\
+\
+mysql> select * from Student;\
++-------------+----------+------------+--------+------------+-------+\
+| Roll_Number | Name     | DOB        | Gender | DOA        | BCode |\
++-------------+----------+------------+--------+------------+-------+\
+|   201951019 | Akansha  | 1999-09-19 | F      | 2021-02-11 | CS    |\
+|   201951198 | Divyam   | 2000-01-14 | M      | 2021-02-12 | CS    |\
+|   201951199 | Bhavin   | 2001-05-04 | M      | 2021-02-13 | CS    |\
+|   201952201 | Jigna    | 1999-03-31 | F      | 2021-02-14 | IT    |\
+|   201952202 | Saurav   | 2001-11-29 | M      | 2021-02-11 | IT    |\
+|   201952203 | Abhishek | 2000-09-10 | M      | 2021-02-13 | IT    |\
+|   201952204 | Anuj     | 2000-06-17 | M      | 2021-02-13 | IT    |\
++-------------+----------+------------+--------+------------+-------+\
+7 rows in set (0.00 sec)\
+\
+mysql> select * from Enrolls;\
++-----------+-------+-----------+-------+\
+| RollNo    | CCode | Sess      | Grade |\
++-----------+-------+-----------+-------+\
+| 201951019 | CS101 | June 2020 | S     |\
+| 201951198 | CE101 | June 2019 | S     |\
+| 201951198 | CS101 | June 2019 | S     |\
+| 201951198 | PS101 | June 2019 | S     |\
+| 201951198 | Sans. | June 2019 | S     |\
++-----------+-------+-----------+-------+\
+5 rows in set (0.00 sec)\
+\
+mysql> select * from Enrolls;\
++-----------+-------+-----------+-------+\
+| RollNo    | CCode | Sess      | Grade |\
++-----------+-------+-----------+-------+\
+| 201951019 | CE101 | June 2020 | A     |\
+| 201951019 | CS101 | June 2020 | S     |\
+| 201951019 | PS101 | June 2020 | S     |\
+| 201951019 | Sans. | June 2020 | B     |\
+| 201951198 | CE101 | June 2019 | S     |\
+| 201951198 | CS101 | June 2019 | S     |\
+| 201951198 | PS101 | June 2019 | S     |\
+| 201951198 | Sans. | June 2019 | S     |\
+| 201951199 | CE101 | June 2020 | S     |\
+| 201951199 | CS101 | June 2020 | A     |\
+| 201951199 | PS101 | June 2020 | S     |\
++-----------+-------+-----------+-------+\
+11 rows in set (0.00 sec)\
+\
+mysql> select * from Enrolls;\
++-----------+-------+-----------+-------+\
+| RollNo    | CCode | Sess      | Grade |\
++-----------+-------+-----------+-------+\
+| 201951019 | CE101 | June 2020 | A     |\
+| 201951019 | CS101 | June 2020 | S     |\
+| 201951019 | PS101 | June 2020 | S     |\
+| 201951019 | Sans. | June 2020 | B     |\
+| 201951198 | CE101 | June 2019 | S     |\
+| 201951198 | CS101 | June 2019 | S     |\
+| 201951198 | PS101 | June 2019 | S     |\
+| 201951198 | Sans. | June 2019 | S     |\
+| 201951199 | CE101 | June 2020 | S     |\
+| 201951199 | CS101 | June 2020 | A     |\
+| 201951199 | PS101 | June 2020 | S     |\
+| 201951199 | Sans. | June 2020 | S     |\
++-----------+-------+-----------+-------+\
+12 rows in set (0.00 sec)\
+\
+mysql> select * from Enrolls;\
++-----------+-------+-----------+-------+\
+| RollNo    | CCode | Sess      | Grade |\
++-----------+-------+-----------+-------+\
+| 201951019 | CE101 | June 2020 | A     |\
+| 201951019 | CS101 | June 2020 | S     |\
+| 201951019 | PS101 | June 2020 | S     |\
+| 201951019 | Sans. | June 2020 | B     |\
+| 201951198 | CE101 | June 2019 | S     |\
+| 201951198 | CS101 | June 2019 | S     |\
+| 201951198 | PS101 | June 2019 | S     |\
+| 201951198 | Sans. | June 2019 | S     |\
+| 201951199 | CE101 | June 2020 | S     |\
+| 201951199 | CS101 | June 2020 | A     |\
+| 201951199 | PS101 | June 2020 | S     |\
+| 201951199 | Sans. | June 2020 | S     |\
+| 201952204 | PS101 | June 2019 | A     |\
++-----------+-------+-----------+-------+\
+13 rows in set (0.00 sec)\
+\
+mysql> select * from Enrolls;\
++-----------+-------+-----------+-------+\
+| RollNo    | CCode | Sess      | Grade |\
++-----------+-------+-----------+-------+\
+| 201951019 | CE101 | June 2020 | A     |\
+| 201951019 | CS101 | June 2020 | S     |\
+| 201951019 | PS101 | June 2020 | S     |\
+| 201951019 | Sans. | June 2020 | B     |\
+| 201951198 | CE101 | June 2019 | S     |\
+| 201951198 | CS101 | June 2019 | S     |\
+| 201951198 | PS101 | June 2019 | S     |\
+| 201951198 | Sans. | June 2019 | S     |\
+| 201951199 | CE101 | June 2020 | S     |\
+| 201951199 | CS101 | June 2020 | A     |\
+| 201951199 | PS101 | June 2020 | S     |\
+| 201951199 | Sans. | June 2020 | S     |\
+| 201952204 | CE101 | June 2019 | S     |\
+| 201952204 | PS101 | June 2019 | A     |\
++-----------+-------+-----------+-------+\
+14 rows in set (0.00 sec)\
+\
+mysql> select * from Enrolls;\
++-----------+-------+-----------+-------+\
+| RollNo    | CCode | Sess      | Grade |\
++-----------+-------+-----------+-------+\
+| 201951019 | CE101 | June 2020 | A     |\
+| 201951019 | CS101 | June 2020 | S     |\
+| 201951019 | PS101 | June 2020 | S     |\
+| 201951019 | Sans. | June 2020 | B     |\
+| 201951198 | CE101 | June 2019 | S     |\
+| 201951198 | CS101 | June 2019 | S     |\
+| 201951198 | PS101 | June 2019 | S     |\
+| 201951198 | Sans. | June 2019 | S     |\
+| 201951199 | CE101 | June 2020 | S     |\
+| 201951199 | CS101 | June 2020 | A     |\
+| 201951199 | PS101 | June 2020 | S     |\
+| 201951199 | Sans. | June 2020 | S     |\
+| 201952201 | CE101 | June 2019 | S     |\
+| 201952202 | CS101 | June 2019 | S     |\
+| 201952203 | CE101 | June 2019 | S     |\
+| 201952204 | CE101 | June 2019 | S     |\
+| 201952204 | PS101 | June 2019 | A     |\
++-----------+-------+-----------+-------+\
+17 rows in set (0.00 sec)\
+\
+mysql> select * from Student where Student.Roll_Number in(select Enrolls.RollNo where Enrolls.Grade = 'S' group by Enrolls.RollNo having count(Enrolls.Grade) > 2);\
+ERROR 1054 (42S22): Unknown column 'Enrolls.RollNo' in 'field list'\
+mysql> alter table Enrolls rename column RollNo to Roll_Number;\
+Query OK, 0 rows affected (0.03 sec)\
+Records: 0  Duplicates: 0  Warnings: 0\
+\
+mysql> select * from Enrolls;\
++-------------+-------+-----------+-------+\
+| Roll_Number | CCode | Sess      | Grade |\
++-------------+-------+-----------+-------+\
+|   201951019 | CE101 | June 2020 | A     |\
+|   201951019 | CS101 | June 2020 | S     |\
+|   201951019 | PS101 | June 2020 | S     |\
+|   201951019 | Sans. | June 2020 | B     |\
+|   201951198 | CE101 | June 2019 | S     |\
+|   201951198 | CS101 | June 2019 | S     |\
+|   201951198 | PS101 | June 2019 | S     |\
+|   201951198 | Sans. | June 2019 | S     |\
+|   201951199 | CE101 | June 2020 | S     |\
+|   201951199 | CS101 | June 2020 | A     |\
+|   201951199 | PS101 | June 2020 | S     |\
+|   201951199 | Sans. | June 2020 | S     |\
+|   201952201 | CE101 | June 2019 | S     |\
+|   201952202 | CS101 | June 2019 | S     |\
+|   201952203 | CE101 | June 2019 | S     |\
+|   201952204 | CE101 | June 2019 | S     |\
+|   201952204 | PS101 | June 2019 | A     |\
++-------------+-------+-----------+-------+\
+17 rows in set (0.00 sec)\
+\
+mysql> select * from Student where Student.Roll_Number in(select Enrolls.Roll_Number where Enrolls.Grade = 'S' group by Enrolls.Roll_Number hav\
+ing count(Enrolls.Grade) > 2);\
+ERROR 1054 (42S22): Unknown column 'Enrolls.Roll_Number' in 'field list'\
+mysql> select * from Enrolls where Roll_Number = '201951198';\
++-------------+-------+-----------+-------+\
+| Roll_Number | CCode | Sess      | Grade |\
++-------------+-------+-----------+-------+\
+|   201951198 | CE101 | June 2019 | S     |\
+|   201951198 | CS101 | June 2019 | S     |\
+|   201951198 | PS101 | June 2019 | S     |\
+|   201951198 | Sans. | June 2019 | S     |\
++-------------+-------+-----------+-------+\
+4 rows in set (0.01 sec)\
+\
+mysql> select * from Student where Student.Roll_Number = '201951198';\
++-------------+--------+------------+--------+------------+-------+\
+| Roll_Number | Name   | DOB        | Gender | DOA        | BCode |\
++-------------+--------+------------+--------+------------+-------+\
+|   201951198 | Divyam | 2000-01-14 | M      | 2021-02-12 | CS    |\
++-------------+--------+------------+--------+------------+-------+\
+1 row in set (0.00 sec)\
+\
+mysql> select * from Student where Student.Roll_Number in (select Enroll.Roll_Number where Enrolls.Grade = 'S');\
+ERROR 1054 (42S22): Unknown column 'Enroll.Roll_Number' in 'field list'\
+mysql> select * from Student where Student.Roll_Number in (select Enrolls.Roll_Number where Enrolls.Grade = 'S');\
+ERROR 1054 (42S22): Unknown column 'Enrolls.Roll_Number' in 'field list'\
+mysql> select * from Student where Student.Roll_Number in(select Enrolls.Roll_Number where Enrolls.Grade = 'S' group by Enrolls.Roll_Number having count(Enrolls.Grade) > 2);\
+ERROR 1054 (42S22): Unknown column 'Enrolls.Roll_Number' in 'field list'\
+mysql> select * from Student where Student.Roll_Number in(select Roll_Number from Enrolls where Enrolls.Grade = 'S' group by Enrolls.Roll_Numbe\
+r having count(Enrolls.Grade) > 2);\
++-------------+--------+------------+--------+------------+-------+\
+| Roll_Number | Name   | DOB        | Gender | DOA        | BCode |\
++-------------+--------+------------+--------+------------+-------+\
+|   201951198 | Divyam | 2000-01-14 | M      | 2021-02-12 | CS    |\
+|   201951199 | Bhavin | 2001-05-04 | M      | 2021-02-13 | CS    |\
++-------------+--------+------------+--------+------------+-------+\
+2 rows in set (0.00 sec)\
+\
+mysql> create view studentdata as select enrolls.Roll_Number,Student.Name,count(Enrolls.Ccode) as c from Student,Enrolls where Enrolls.Roll_Num\
+ber = Student.Roll_Numer and Enrolls.Grade !='U' group by Enrolls.Roll_Number,Student.Name;\
+ERROR 1054 (42S22): Unknown column 'Student.Roll_Numer' in 'where clause'\
+mysql> create view studentdata as select enrolls.Roll_Number,Student.Name,count(Enrolls.Ccode) as c from Student,Enrolls where Enrolls.Roll_Number = Student.Roll_Number and Enrolls.Grade !='U' group by Enrolls.Roll_Number,Student.Name;\
+Query OK, 0 rows affected (0.01 sec)\
+\
+mysql> select * from Studentdata;\
++-------------+----------+---+\
+| Roll_Number | Name     | c |\
++-------------+----------+---+\
+|   201951019 | Akansha  | 4 |\
+|   201951198 | Divyam   | 4 |\
+|   201951199 | Bhavin   | 4 |\
+|   201952201 | Jigna    | 1 |\
+|   201952202 | Saurav   | 1 |\
+|   201952203 | Abhishek | 1 |\
+|   201952204 | Anuj     | 2 |\
++-------------+----------+---+\
+7 rows in set (0.01 sec)\
+\
+mysql> create view STUDENTVIEW as select enrolls.Roll_Number,Student.Name,count(Enrolls.Ccode) as c from Student,Enrolls where Enrolls.Roll_Num\
+ber = Student.Roll_Number and Enrolls.Grade !='U' group by Enrolls.Roll_Number,Student.Name;\
+Query OK, 0 rows affected (0.00 sec)\
+\
+mysql> select * from STUDENTVIEW;;\
++-------------+----------+---+\
+| Roll_Number | Name     | c |\
++-------------+----------+---+\
+|   201951019 | Akansha  | 4 |\
+|   201951198 | Divyam   | 4 |\
+|   201951199 | Bhavin   | 4 |\
+|   201952201 | Jigna    | 1 |\
+|   201952202 | Saurav   | 1 |\
+|   201952203 | Abhishek | 1 |\
+|   201952204 | Anuj     | 2 |\
++-------------+----------+---+\
+7 rows in set (0.01 sec)\
+\
+\
+Q3 ________\
+\
+\
+CREATE TABLE Customer(\
+Customerno varchar(5) PRIMARY KEY,\
+CName varchar(50) not null,\
+check(Customerno like 'C%')\
+);\
+\
+CREATE TABLE Cust_Order(\
+Orderno varchar(5) PRIMARY KEY,\
+Customerno varchar(5) not null,\
+ODate datetime default now(),\
+Ord_amtnumber int(8) not null default 0,\
+constraint foreign key(Customerno) references Customer(Customerno) on delete cascade on update cascade,\
+check (Orderno like'O%')\
+);\
+\
+CREATE TABLE Item(\
+Itemno varchar(5) PRIMARY KEY check (Itemno like "I%"),\
+Item_name varchar(30) not null,\
+unit_price int(5) not null\
+);\
+\
+CREATE TABLE Order_item(\
+Orderno varchar(5) not null,\
+Itemno varchar(5) not null,\
+qty int(3) not null,\
+constraint foreign key(Orderno) references Cust_Order(Orderno) on delete cascade on update cascade,\
+constraint foreign key(Itemno) references Item(Itemno) on delete cascade on update cascade\
+);\
+\
+INSERT INTO Customer\
+VALUES('C1198', 'Divyam Solanki');\
+\
+INSERT INTO Customer\
+VALUES('C1199', 'Bhavin');\
+\
+INSERT INTO Customer\
+VALUES('C2006', 'Vishnu');\
+\
+INSERT INTO Cust_Order\
+VALUES ('O1198','C1198','2021-02-23',1750);\
+\
+INSERT INTO Cust_Order\
+VALUES ('O2007','C2001','2021-02-20',4000);\
+\
+INSERT INTO Cust_Order\
+VALUES ('O2014','C2001','2021-02-16',20000);\
+\
+INSERT INTO ITem\
+VALUES ('I1198','Rice bag', 1750);\
+\
+INSERT INTO Item\
+VALUES ('I2008','Cooler', 7000);\
+\
+INSERT INTO Order_Item \
+VALUES ('O2008', 'I1198', 5);\
+\
+INSERT INTO Order_Item \
+VALUES ('O2005', 'I2008', 1);\
+\
+\
+Q4 ___________\
+\
+\
+CREATE TABLE Employee(\
+eid int PRIMARY KEY not null,\
+manager_id int,\
+foreign key(manager_id) references employee(eid) on DELETE CASCADE\
+);\
+\
+\
+INSERT INTO Employee \
+VALUES (1198, NULL);\
+\
+INSERT INTO Employee \
+VALUES (2000, 1198);\
+\
+INSERT INTO Employee \
+VALUES (2001, 2000);\
+\
+INSERT INTO Employee \
+VALUES (2002, 1198);\
+\
+INSERT INTO Employee \
+VALUES (2003, 2002);\
+\
+\
+\
+\
+\
+\
+\
+}
